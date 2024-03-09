@@ -31,4 +31,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "hanami-cli", "~> 2.1"
+  spec.add_dependency "hanami-utils", "~> 2.1"
 end
