@@ -8,8 +8,8 @@ require "dry/inflector"
 
 require "hanami/cli/bundler"
 require "hanami/cli/command"
-require "hanami/cli/system_call"
 require "hanami/cli/generators/context"
+require "hanami/cli/system_call"
 
 module Cerise
   module Boilerplates
@@ -22,11 +22,13 @@ module Cerise
         inflector: Dry::Inflector.new,
 
         fs: Dry::Files.new,
-        bundler: Hanami::CLI::Bundler.new(fs: fs),
+        bundler: Hanami::CLI::Bundler.new(fs:),
         context: Hanami::CLI::Generators::Context.new(inflector, app),
-        system_call: Hanami::CLI::SystemCall.new, **opts)
+        system_call: Hanami::CLI::SystemCall.new,
+        **opts
+      )
 
-        super(fs: fs, inflector: inflector, **opts)
+        super(fs:, inflector:, **opts)
         @bundler = bundler
         @context = context
         @system_call = system_call

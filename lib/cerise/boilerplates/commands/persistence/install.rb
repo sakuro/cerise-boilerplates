@@ -7,7 +7,6 @@ module Cerise
     module Commands
       module Persistence
         class Install < Cerise::Boilerplates::Command
-
           def call(*, **)
             bundler.bundle("add rom rom-sql pg")
             bundler.bundle("add database_clearner-sequel --group test")
