@@ -54,7 +54,7 @@ module Cerise
 
       private def create_spec_support(feature)
         fs.write("spec/support/#{feature}.rb", template("spec/support/#{feature}.rb"))
-        fs.append("spec/spec_support.rb", %(require_relative "support/#{feature}"))
+        fs.append("spec/spec_helper.rb", %(require_relative "support/#{feature}"))
       end
 
       private def create_rake_task(task)
