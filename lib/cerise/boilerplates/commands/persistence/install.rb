@@ -38,9 +38,9 @@ module Cerise
           private def database_url(environment)
             URI::Generic.build(
               scheme: "postgres",
-              userinfo: %w[posetgres posegres].join(":"),
-              host: "localhost",
-              port: 5432,
+              userinfo: [ENV.fetch("PGUSER", ENV.fetch("USER")), "postgres"].join(":"),
+              host: ENV.fetch("PGHOST", "localhost"),
+              port: ENV.fetch("PGPORT", 5432),
               path: "/#{database_name(environment)}"
             )
           end
