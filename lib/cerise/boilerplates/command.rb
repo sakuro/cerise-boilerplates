@@ -36,6 +36,15 @@ module Cerise
 
       private attr_reader :bundler, :context, :system_call
 
+      private def execute_command(command, args)
+        system_call.call(command, args).tap do |result|
+          unless result.successful?
+            puts "Error from #{command}"
+            puts(result.err.lines.map {|line| line.prepend("\t") })
+          end
+        end
+      end
+
       private def npm_install(*packages, development: false)
         if development
           args = ["install", *packages, "--save-dev"]
@@ -44,12 +53,7 @@ module Cerise
           puts "Installing npm packages: %p" % [packages]
           args = ["install", *packages]
         end
-        system_call.call("npm", args).tap do |result|
-          unless result.successful?
-            puts "NPM ERROR:"
-            puts(result.err.lines.map {|line| line.prepend("    ") })
-          end
-        end
+        execute_command("npm", args)
       end
 
       private def create_spec_support(feature)

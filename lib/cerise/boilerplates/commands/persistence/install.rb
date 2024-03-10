@@ -31,7 +31,7 @@ module Cerise
           private def create_databases
             ENVIRONMENTS.each do |environment|
               puts "Creating #{environment} database"
-              system_call.call("createdb #{database_name(environment)}")
+              execute_command("createdb", database_name(environment))
             end
           end
 
