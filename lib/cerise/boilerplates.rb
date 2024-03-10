@@ -25,6 +25,7 @@ module Cerise
 
     if Hanami::CLI.within_hanami_app?
       Hanami::CLI.after "install", Commands::Rake::Install
+      Hanami::CLI.after "install", Commands::Rubocop::Install
       Hanami::CLI.after "install", Commands::Persistence::Install
       Hanami::CLI.after "install", Commands::Session::Install
       # Hanami::CLI.after "install", Commands::Operation::Install
