@@ -58,8 +58,8 @@ module Cerise
       end
 
       private def create_rake_task(task)
-        fs.write("lib/tasks/#{task}.rake", template("lib/tasks/#{task}.rake"))
-        fs.append("Rakefile", %(load "./lib/tasks/#{task}.rake"))
+        fs.write("lib/tasks/#{task}.rb", template("lib/tasks/#{task}.rb"))
+        fs.append("Rakefile", %(require_relative "lib/tasks/#{task}.rb"))
       end
 
       private def template(path)
