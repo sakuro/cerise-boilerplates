@@ -29,7 +29,7 @@ module Cerise
       Hanami::CLI.after "install", Commands::Session::Install
       # Hanami::CLI.after "install", Commands::Operation::Install
       Hanami::CLI.after "install", Commands::SolidJs::Install
-      Hanami::CLI.after "install", Commands::DevTools::Install
+      Hanami::CLI.after "install", Commands::Dev::Install
     end
   end
 end

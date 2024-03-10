@@ -3,13 +3,14 @@
 module Cerise
   module Boilerplates
     module Commands
-      module DevTools
+      module Dev
         class Install < Cerise::Boilerplates::Command
           def call(*, **)
             install_support_gems
             create_spec_support("faker")
             remove_unwanted_foreman_installation
             create_binstubs
+            create_git_ignore
           end
 
           private def install_support_gems
@@ -24,6 +25,10 @@ module Cerise
 
           private def create_binstubs
             bundler.bundle("binstubs --all")
+          end
+
+          private def create_git_ignore
+            fs.write(".gitignore", template("dot.gitignore"))
           end
         end
       end
