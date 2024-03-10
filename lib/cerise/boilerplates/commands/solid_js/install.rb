@@ -10,6 +10,7 @@ module Cerise
             install_esbuild_plugin_solid
             replace_config_assets_js
             replace_app_js_with_app_tsx
+            copy_root_component
             create_tsconfig_json
           end
 
@@ -29,6 +30,10 @@ module Cerise
           private def replace_app_js_with_app_tsx
             fs.delete("app/assets/js/app.js")
             fs.write("app/assets/js/app.tsx", template("app/assets/js/app.tsx"))
+          end
+
+          private def copy_root_component
+            fs.write("app/assets/js/Root.tsx", template("app/assets/js/Root.tsx"))
           end
 
           private def create_tsconfig_json
