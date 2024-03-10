@@ -5,12 +5,19 @@ module Cerise
     module Commands
       module Dev
         class Install < Cerise::Boilerplates::Command
+          GIT_IGNORE_ENTRIES = %w[
+            .env.local
+            .env.*.local
+            vendor/bundle/
+          ].freeze
+          private_constant :GIT_IGNORE_ENTRIES
+
           def call(*, **)
             install_support_gems
             create_spec_support("faker")
             remove_unwanted_foreman_installation
             create_binstubs
-            create_git_ignore
+            append_git_ignore_entries
           end
 
           private def install_support_gems
@@ -27,8 +34,10 @@ module Cerise
             bundler.bundle("binstubs --all")
           end
 
-          private def create_git_ignore
-            fs.write(".gitignore", template("dot.gitignore"))
+          private def append_git_ignore_entries
+            GIT_IGNORE_ENTRIES.each do |entry|
+              fs.append(".gitignore", entry)
+            end
           end
         end
       end

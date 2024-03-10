@@ -1,7 +1,0 @@
-.env.local
-.env.*.local
-node_modules/
-log/
-public/
-spec/examples.txt
-vendor/bundle/
