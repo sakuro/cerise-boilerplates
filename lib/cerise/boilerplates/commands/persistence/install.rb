@@ -9,7 +9,7 @@ module Cerise
         class Install < Cerise::Boilerplates::Command
           def call(*, **)
             add_gems("rom", "rom-sql", "pg", skip_install: true)
-            add_gems("database_clearner-sequel", group: :test)
+            add_gems("database_cleaner-sequel", group: :test)
 
             create_database_url_setting
             create_persistence_provider
