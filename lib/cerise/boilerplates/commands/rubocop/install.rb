@@ -9,6 +9,7 @@ module Cerise
             install_gems
             create_configs
             generate_rubocop_todo_yml
+            apply_autocorrect
           end
 
           private def install_gems
@@ -23,6 +24,10 @@ module Cerise
 
           private def generate_rubocop_todo_yml
             bundler.exec("rubocop --auto-gen-config")
+          end
+
+          private def apply_autocorrect
+            bundler.exec("rubocop --autocorrect")
           end
         end
       end
