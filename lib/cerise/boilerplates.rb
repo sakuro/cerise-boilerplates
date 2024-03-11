@@ -31,6 +31,8 @@ module Cerise
       # Hanami::CLI.after "install", Commands::Operation::Install
       Hanami::CLI.after "install", Commands::SolidJs::Install
       Hanami::CLI.after "install", Commands::Dev::Install
+
+      Hanami::CLI.after "install", Commands::Finalize::Install
     end
   end
 end

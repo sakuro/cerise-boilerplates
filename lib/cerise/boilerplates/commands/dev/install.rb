@@ -5,39 +5,20 @@ module Cerise
     module Commands
       module Dev
         class Install < Cerise::Boilerplates::Command
-          GIT_IGNORE_ENTRIES = %w[
-            .env.local
-            .env.*.local
-            vendor/bundle/
-          ].freeze
-          private_constant :GIT_IGNORE_ENTRIES
-
           def call(*, **)
-            install_support_gems
-            create_spec_support("faker")
-            remove_unwanted_foreman_installation
-            create_binstubs
-            append_git_ignore_entries
-          end
+            add_gems("ruby-lsp", "foreman", group: :development, skip_install: true)
+            add_gems("faker", group: :test, skip_install: true)
+            add_gems("debug", "repl_type_completor", group: %i[development test])
 
-          private def install_support_gems
-            bundler.bundle("add ruby-lsp foreman --group development --skip-install")
-            bundler.bundle("add faker --group test --skip-install")
-            bundler.bundle("add debug repl_type_completor --group development,test")
+            create_spec_support("faker")
+
+            add_git_ignore(".env.local", ".env.*.local", "vendor/bundle/")
+
+            remove_unwanted_foreman_installation
           end
 
           private def remove_unwanted_foreman_installation
             system_call.call('(rm -f bin/dev && sed -e "/^if/,/^fi/d" > bin/dev && chmod +x bin/dev) < bin/dev')
-          end
-
-          private def create_binstubs
-            bundler.bundle("binstubs --all")
-          end
-
-          private def append_git_ignore_entries
-            GIT_IGNORE_ENTRIES.each do |entry|
-              fs.append(".gitignore", entry)
-            end
           end
         end
       end

@@ -8,8 +8,9 @@ module Cerise
       module Persistence
         class Install < Cerise::Boilerplates::Command
           def call(*, **)
-            bundler.bundle("add rom rom-sql pg")
-            bundler.bundle("add database_clearner-sequel --group test")
+            add_gems("rom", "rom-sql", "pg", skip_install: true)
+            add_gems("database_clearner-sequel", group: :test)
+
             create_database_url_setting
             create_persistence_provider
             create_spec_support("database_cleaner")
