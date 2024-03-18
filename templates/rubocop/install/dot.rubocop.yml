@@ -26,3 +26,7 @@ AllCops:
     - spec/spec_helper.rb
     - spec/support/rspec.rb
     - "*.gemspec"
+
+RSpec/SpecFilePathFormat:
+  CustomTransform:
+    <%= camelized_app_name %>: ""
