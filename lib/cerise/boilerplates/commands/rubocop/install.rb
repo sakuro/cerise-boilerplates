@@ -8,6 +8,7 @@ module Cerise
           def call(*, **)
             add_gems("rubocop", "rubocop-performance", "rubocop-rake", "rubocop-rspec", group: :development)
             create_configs
+            create_rake_task(:rubocop)
           end
 
           private def create_configs
